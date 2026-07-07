@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Criativos — Jardim Hípica | Best Business</title>
+<style>
+  :root{
+    --preto:#0a0a0d;
+    --preto-2:#141119;
+    --card:#181320;
+    --card-2:#1f1830;
+    --roxo:#8b3cf0;
+    --roxo-claro:#b57bff;
+    --roxo-glow:rgba(139,60,240,.35);
+    --branco:#ffffff;
+    --cinza:#b8b2c4;
+    --cinza-2:#7d7690;
+    --borda:#2a2338;
+    --verde:#39d98a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--preto);
+    color:var(--branco);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  header.hero{
+    padding:64px 0 48px;
+    background:
+      radial-gradient(900px 380px at 80% -10%, var(--roxo-glow), transparent 60%),
+      radial-gradient(700px 300px at 0% 10%, rgba(139,60,240,.18), transparent 55%);
+    border-bottom:1px solid var(--borda);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--roxo-claro);font-weight:700;
+    border:1px solid var(--borda);border-radius:100px;
+    padding:6px 14px;background:rgba(139,60,240,.08);
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--roxo);box-shadow:0 0 12px var(--roxo)}
+  h1{font-size:clamp(30px,5vw,50px);line-height:1.1;font-weight:800;margin:20px 0 14px;letter-spacing:-.02em}
+  h1 span{color:var(--roxo-claro)}
+  .sub{color:var(--cinza);font-size:17px;max-width:640px}
+  .meta-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .meta-tags span{
+    font-size:13px;color:var(--cinza);background:var(--card);
+    border:1px solid var(--borda);border-radius:8px;padding:7px 12px;
+  }
+  .meta-tags b{color:var(--branco);font-weight:600}
+
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:-32px 0 0;position:relative;z-index:2}
+  .kpi{
+    background:linear-gradient(160deg,var(--card-2),var(--card));
+    border:1px solid var(--borda);border-radius:16px;padding:22px 20px;
+  }
+  .kpi .lbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--cinza-2);font-weight:600}
+  .kpi .val{font-size:32px;font-weight:800;margin-top:8px;letter-spacing:-.02em}
+  .kpi .val.roxo{color:var(--roxo-claro)}
+  .kpi .val.verde{color:var(--verde)}
+  .kpi .hint{font-size:12px;color:var(--cinza-2);margin-top:4px}
+
+  section{padding:52px 0 8px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  h2{font-size:26px;font-weight:800;letter-spacing:-.01em}
+  .sec-desc{color:var(--cinza);font-size:15px;margin-bottom:26px;max-width:720px}
+
+  /* PODIUM / cards */
+  .cards{display:grid;grid-template-columns:1fr;gap:14px}
+  .card{
+    display:grid;grid-template-columns:56px 1fr auto;gap:18px;align-items:center;
+    background:var(--card);border:1px solid var(--borda);border-radius:14px;
+    padding:18px 20px;transition:border-color .2s,transform .2s;
+  }
+  .card:hover{border-color:var(--roxo);transform:translateY(-2px)}
+  .rank{
+    font-size:22px;font-weight:800;color:var(--roxo-claro);
+    width:56px;height:56px;display:flex;align-items:center;justify-content:center;
+    background:rgba(139,60,240,.12);border:1px solid var(--borda);border-radius:12px;
+  }
+  .card.gold .rank{color:#ffd76a;background:rgba(255,200,60,.1)}
+  .c-body{min-width:0}
+  .c-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .c-code{font-size:12px;color:var(--cinza-2);font-family:ui-monospace,Menlo,monospace;margin-top:2px;word-break:break-all}
+  .c-stats{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+  .stat{text-align:right}
+  .stat .n{font-size:20px;font-weight:800;line-height:1}
+  .stat .n.roxo{color:var(--roxo-claro)}
+  .stat .n.verde{color:var(--verde)}
+  .stat .t{font-size:11px;color:var(--cinza-2);text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+  .drive{
+    display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+    font-size:13px;font-weight:600;color:var(--branco);text-decoration:none;
+    background:var(--roxo);border-radius:9px;padding:9px 15px;transition:background .2s,box-shadow .2s;
+  }
+  .drive:hover{background:var(--roxo-claro);box-shadow:0 0 18px var(--roxo-glow)}
+  .drive.ghost{background:transparent;border:1px solid var(--borda);color:var(--cinza)}
+  .drive.ghost:hover{border-color:var(--roxo);color:var(--branco);box-shadow:none}
+
+  /* TABLE */
+  .table-scroll{overflow-x:auto;border:1px solid var(--borda);border-radius:14px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  th,td{padding:14px 16px;text-align:left;font-size:14px;border-bottom:1px solid var(--borda)}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--cinza-2);font-weight:700;background:var(--preto-2)}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  td .mono{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--cinza)}
+  tr:hover td{background:rgba(139,60,240,.05)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px}
+  .pill.top{background:rgba(255,200,60,.14);color:#ffd76a}
+  .pill.good{background:rgba(57,217,138,.12);color:var(--verde)}
+
+  /* INSIGHT */
+  .insight{
+    background:linear-gradient(160deg,var(--card-2),var(--card));
+    border:1px solid var(--borda);border-left:3px solid var(--roxo);
+    border-radius:14px;padding:24px 26px;margin-top:10px;
+  }
+  .insight h3{font-size:16px;color:var(--roxo-claro);margin-bottom:12px;display:flex;align-items:center;gap:9px}
+  .insight ul{list-style:none;display:grid;gap:12px}
+  .insight li{color:var(--cinza);font-size:15px;padding-left:22px;position:relative}
+  .insight li::before{content:"▸";position:absolute;left:0;color:var(--roxo)}
+  .insight li b{color:var(--branco);font-weight:600}
+
+  .note{font-size:13px;color:var(--cinza-2);margin-top:16px;padding:14px 16px;background:var(--preto-2);border:1px dashed var(--borda);border-radius:10px}
+
+  footer{margin-top:60px;padding:34px 0 50px;border-top:1px solid var(--borda);color:var(--cinza-2);font-size:13px}
+  footer b{color:var(--cinza)}
+  .brand{color:var(--roxo-claro);font-weight:700}
+
+  @media(max-width:760px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .card{grid-template-columns:44px 1fr;gap:14px}
+    .rank{width:44px;height:44px;font-size:18px}
+    .card .c-stats{grid-column:1/-1;justify-content:space-between;padding-top:6px;border-top:1px solid var(--borda);margin-top:4px}
+    .drive{grid-column:1/-1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Relatório de Performance · Tráfego Pago</div>
+    <h1>Criativos que mais geraram <span>Leads</span><br>— Jardim Hípica</h1>
+    <p class="sub">Análise das campanhas de captação (que contêm <b>“Lead”</b> no nome) da conta de anúncios da Best Business. Ranking dos criativos por quantidade de leads e por custo por lead (CPL), com o link de cada peça no Drive.</p>
+    <div class="meta-tags">
+      <span>Conta: <b>Best Business — Jardim Hípica</b></span>
+      <span>Objetivo: <b>Cadastros / Leads</b></span>
+      <span>Período: <b>histórico completo</b></span>
+      <span>Filtro: <b>campanhas “Lead”</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- KPIs -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="lbl">Leads gerados</div>
+      <div class="val roxo">114</div>
+      <div class="hint">nas campanhas de captação</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Investimento</div>
+      <div class="val">R$ 7.009</div>
+      <div class="hint">total nas campanhas “Lead”</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">CPL médio</div>
+      <div class="val">R$ 61,48</div>
+      <div class="hint">custo por lead da conta</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Melhor CPL</div>
+      <div class="val verde">R$ 24,51</div>
+      <div class="hint">criativo “Já Pensou”</div>
+    </div>
+  </div>
+
+  <!-- MELHOR EM QUANTIDADE -->
+  <section id="volume">
+    <div class="sec-head"><h2>🏆 Melhores em quantidade de leads</h2></div>
+    <p class="sec-desc">Os criativos que trouxeram o maior <b>volume de leads</b>. Os dois primeiros sozinhos responderam por mais da metade de toda a captação.</p>
+
+    <div class="cards">
+
+      <div class="card gold">
+        <div class="rank">1º</div>
+        <div class="c-body">
+          <div class="c-name">Quanto Vale</div>
+          <div class="c-code">ADV12_ARMIGTH_CP_JD HIPICA_QUANTO VALE</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n roxo">44</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 61,81</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">R$ 2.719</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/drive/folders/1-8jAym-yNtQDj-9Jj_q6V4_scWYBI6dZ" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">2º</div>
+        <div class="c-body">
+          <div class="c-name">Quase Metade</div>
+          <div class="c-code">ADV19_ARMGTH_CP_JD HIPICA_QUASE METADE</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n roxo">23</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 63,92</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">R$ 1.470</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1p7VnQ-V829ATviA44GKrma7IlJ-h5MyO/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">3º</div>
+        <div class="c-body">
+          <div class="c-name">Investir</div>
+          <div class="c-code">ADV04_ARMIGTH_CP_JD HIPICA_INVESTIR</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n roxo">10</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n verde">R$ 28,55</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">R$ 286</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1N8ZPwmZrHkzhs3xB2yAOcJfV_4fQn6V9/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">4º</div>
+        <div class="c-body">
+          <div class="c-name">8km de Viracopos</div>
+          <div class="c-code">ADV18_ARMIGTH_CP_JD HIPICA_8KM DE VIRACOPOS</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n roxo">7</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n verde">R$ 31,76</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">R$ 222</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1Lo1l_fs_W4nw8EkyzGoOTBb7B9gUhkEw/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">5º</div>
+        <div class="c-body">
+          <div class="c-name">Grandes Investidores</div>
+          <div class="c-code">ADV05_ARMIGTH_CP_JD HIPICA_GRANDES INVESTIDORES</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n roxo">5</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 34,88</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">R$ 174</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/105EHCYnzKxX67NzTXBN5JHiINFBHi4ER/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MELHOR EM CUSTO -->
+  <section id="custo">
+    <div class="sec-head"><h2>💰 Melhores em custo por lead</h2></div>
+    <p class="sec-desc">Os criativos mais <b>eficientes</b> — menor custo por lead (considerando apenas peças com 2+ leads, para evitar ruído de baixa amostragem).</p>
+
+    <div class="cards">
+
+      <div class="card gold">
+        <div class="rank">1º</div>
+        <div class="c-body">
+          <div class="c-name">Já Pensou</div>
+          <div class="c-code">ADV23_ARMGTH_CP_JD HIPICA_JA PENSOU</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n verde">R$ 24,51</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">2</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 49</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1I00H4qqVm0lfyeCuZpeIxqzgNzim87Sd/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">2º</div>
+        <div class="c-body">
+          <div class="c-name">Investir <span class="pill good">melhor custo × volume</span></div>
+          <div class="c-code">ADV04_ARMIGTH_CP_JD HIPICA_INVESTIR</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n verde">R$ 28,55</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">10</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 286</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1N8ZPwmZrHkzhs3xB2yAOcJfV_4fQn6V9/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">3º</div>
+        <div class="c-body">
+          <div class="c-name">Lago Particular</div>
+          <div class="c-code">ADV10_ARMIGTH_CP_JD HIPICA_LAGO PARTICULA</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n verde">R$ 31,03</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">2</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 62</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1KqPtNW-K5ClpZkofNe5coC43FeXWIF7O/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="rank">4º</div>
+        <div class="c-body">
+          <div class="c-name">8km de Viracopos</div>
+          <div class="c-code">ADV18_ARMIGTH_CP_JD HIPICA_8KM DE VIRACOPOS</div>
+        </div>
+        <div class="c-stats">
+          <div class="stat"><div class="n verde">R$ 31,76</div><div class="t">CPL</div></div>
+          <div class="stat"><div class="n">7</div><div class="t">leads</div></div>
+          <div class="stat"><div class="n">R$ 222</div><div class="t">investido</div></div>
+          <a class="drive" href="https://drive.google.com/file/d/1Lo1l_fs_W4nw8EkyzGoOTBb7B9gUhkEw/view" target="_blank" rel="noopener">▶ Drive</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TABELA COMPLETA -->
+  <section id="tabela">
+    <div class="sec-head"><h2>📊 Ranking completo dos criativos com leads</h2></div>
+    <p class="sec-desc">Todos os criativos que geraram pelo menos 1 lead nas campanhas de captação, ordenados por volume.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Criativo</th><th>Código do anúncio</th>
+            <th style="text-align:right">Leads</th><th style="text-align:right">Investido</th><th style="text-align:right">CPL</th><th>Drive</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Quanto Vale <span class="pill top">TOP</span></td><td><span class="mono">ADV12 · ARMIGTH</span></td><td class="num">44</td><td class="num">R$ 2.719</td><td class="num">R$ 61,81</td><td><a class="drive ghost" href="https://drive.google.com/drive/folders/1-8jAym-yNtQDj-9Jj_q6V4_scWYBI6dZ" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>2</td><td>Quase Metade</td><td><span class="mono">ADV19 · ARMGTH</span></td><td class="num">23</td><td class="num">R$ 1.470</td><td class="num">R$ 63,92</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1p7VnQ-V829ATviA44GKrma7IlJ-h5MyO/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>3</td><td>Investir <span class="pill good">eficiente</span></td><td><span class="mono">ADV04 · ARMIGTH</span></td><td class="num">10</td><td class="num">R$ 286</td><td class="num">R$ 28,55</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1N8ZPwmZrHkzhs3xB2yAOcJfV_4fQn6V9/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>4</td><td>8km de Viracopos</td><td><span class="mono">ADV18 · ARMIGTH</span></td><td class="num">7</td><td class="num">R$ 222</td><td class="num">R$ 31,76</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1Lo1l_fs_W4nw8EkyzGoOTBb7B9gUhkEw/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>5</td><td>Quanto Vale <span class="mono">(recorte novo)</span></td><td><span class="mono">ADV12 · ARMIGH</span></td><td class="num">6</td><td class="num">R$ 409</td><td class="num">R$ 68,13</td><td><a class="drive ghost" href="https://drive.google.com/drive/folders/1-8jAym-yNtQDj-9Jj_q6V4_scWYBI6dZ" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>6</td><td>Grandes Investidores</td><td><span class="mono">ADV05 · ARMIGTH</span></td><td class="num">5</td><td class="num">R$ 174</td><td class="num">R$ 34,88</td><td><a class="drive ghost" href="https://drive.google.com/file/d/105EHCYnzKxX67NzTXBN5JHiINFBHi4ER/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>7</td><td>Quando Você Sabe</td><td><span class="mono">ADV35 · ARMGTH</span></td><td class="num">4</td><td class="num">R$ 267</td><td class="num">R$ 66,82</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1j4btE8JLKf5bRY94AqlFe5FgX5v_K4up/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>8</td><td>Para Quem Sabe</td><td><span class="mono">ADV37 · ARMGTH</span></td><td class="num">4</td><td class="num">R$ 228</td><td class="num">R$ 56,95</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1BTsY52CwdS4P-4rtWfG9Er1OhM4PbzbJ/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>9</td><td>Já Pensou <span class="pill good">menor CPL</span></td><td><span class="mono">ADV23 · ARMGTH</span></td><td class="num">3</td><td class="num">R$ 79</td><td class="num">R$ 26,37</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1I00H4qqVm0lfyeCuZpeIxqzgNzim87Sd/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+          <tr><td>10</td><td>Lago Particular</td><td><span class="mono">ADV10 · ARMIGTH</span></td><td class="num">2</td><td class="num">R$ 62</td><td class="num">R$ 31,03</td><td><a class="drive ghost" href="https://drive.google.com/file/d/1KqPtNW-K5ClpZkofNe5coC43FeXWIF7O/view" target="_blank" rel="noopener">Abrir</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Observação: quando o mesmo conceito de criativo (ex.: <b>Quanto Vale</b>) foi veiculado em versões diferentes (lote ARMIGTH e recorte ARMIGH/ARMGTH), cada versão aparece separada, como está na conta de anúncios. O CPL é calculado como investimento ÷ leads.</p>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights">
+    <div class="sec-head"><h2>🎯 Leitura estratégica</h2></div>
+    <div class="insight">
+      <h3>O que os números dizem</h3>
+      <ul>
+        <li><b>“Quanto Vale” é o campeão absoluto de volume:</b> 44 leads sozinho — vale reinvestir e criar variações a partir dele.</li>
+        <li><b>“Investir” é o criativo mais equilibrado:</b> juntou volume (10 leads) com o melhor custo entre as peças de escala (R$ 28,55). É o melhor custo × benefício da conta.</li>
+        <li><b>Ângulos racionais/financeiros performam:</b> “Quanto Vale”, “Investir”, “Quase Metade”, “Grandes Investidores” e “8km de Viracopos” dominam o topo — o público responde melhor a valor de investimento e localização do que a apelos emocionais.</li>
+        <li><b>Oportunidade de escala:</b> “Já Pensou” e “Lago Particular” têm CPL baixo mas pouca verba — vale subir o orçamento para validar em volume maior.</li>
+      </ul>
+    </div>
+    <p class="note">⚠️ O criativo <b>“Quanto Vale” (ADV12)</b> pertence ao pacote de vídeos <b>“Jardim Hípica 1”</b> no Drive (mesma peça-base, ganchos diferentes). O link acima abre a pasta com os arquivos brutos desse conjunto. Se quiser, eu identifico o arquivo exato do gancho “Quanto Vale” dentro da pasta.</p>
+  </section>
+
+  <footer>
+    <p>Relatório gerado para <b class="brand">Jardim Hípica — Best Business</b> · Gestão de Tráfego Pago <b class="brand">Brito Mídias</b></p>
+    <p style="margin-top:6px">Fonte: Meta Ads (campanhas com “Lead” no nome) · Links dos criativos: Google Drive · Métricas do histórico completo da conta.</p>
+  </footer>
+
+</div>
+</body>
+</html>
